@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebCraft Studio | High-Converting Digital Experiences & Web Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090a0f',
+                        darkCard: '#11131f',
+                        darkCardHover: '#181b2c',
+                        brandPurple: '#8b5cf6',
+                        brandCyan: '#06b6d4',
+                        brandIndigo: '#6366f1',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090a0f;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e2438;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+        /* Glassmorphism elements */
+        .glass-panel {
+            background: rgba(17, 19, 31, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.2);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-gradient-btn {
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+        }
+        .bg-gradient-btn:hover {
+            background: linear-gradient(135deg, #6d28d9 0%, #1d4ed8 100%);
+        }
+        .glow-effect {
+            box-shadow: 0 0 50px -10px rgba(124, 58, 237, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 antialiased selection:bg-brandPurple selection:text-white">
+
+    <!-- Background Decorative Glows -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brandPurple/20 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse-slow"></div>
+    <div class="fixed top-1/3 right-10 w-96 h-96 bg-brandCyan/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 left-1/3 w-[30rem] h-[30rem] bg-brandIndigo/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-btn flex items-center justify-center shadow-lg shadow-purple-500/20">
+                        <i class="fa-solid fa-code text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight">WebCraft<span class="text-gradient">.Studio</span></span>
+                </div>
+
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors">Showcase</a>
+                    <a href="#calculator" class="text-gray-300 hover:text-white transition-colors">Valuation Calculator</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-white transition-colors">Reviews</a>
+                </div>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="openModal('audit')" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-white/10 hover:bg-white/20 border border-white/10 text-white transition-all duration-200">
+                        Free Audit
+                    </button>
+                    <button onclick="openModal('project')" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-gradient-btn text-white hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-200 transform hover:-translate-y-0.5">
+                        Start Project
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-4 pt-4 pb-6 space-y-4">
+            <a href="#services" class="block text-gray-300 hover:text-white font-medium py-1">Services</a>
+            <a href="#portfolio" class="block text-gray-300 hover:text-white font-medium py-1">Showcase</a>
+            <a href="#calculator" class="block text-gray-300 hover:text-white font-medium py-1">Valuation Calculator</a>
+            <a href="#pricing" class="block text-gray-300 hover:text-white font-medium py-1">Pricing</a>
+            <a href="#testimonials" class="block text-gray-300 hover:text-white font-medium py-1">Reviews</a>
+            <div class="pt-4 space-y-3">
+                <button onclick="openModal('audit')" class="w-full text-center px-4 py-2.5 rounded-xl bg-white/10 text-white font-semibold">Free Audit</button>
+                <button onclick="openModal('project')" class="w-full text-center px-4 py-2.5 rounded-xl bg-gradient-btn text-white font-semibold">Start Project</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-36 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Content -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-purple-500/30 text-purple-300 text-xs sm:text-sm font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>Now Booking Projects for US, UK & Global Clients</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-none">
+                        We Build High-Converting <br class="hidden sm:inline"/>
+                        <span class="text-gradient">Digital Experiences</span> That Sell.
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Transform your brand with bespoke web applications, high-converting landing pages, and scalable SaaS platforms built to capture foreign markets and scale revenue.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <button onclick="openModal('project')" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-btn text-white font-bold text-base shadow-xl shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-[1.02] transition-all duration-200">
+                            Start Your Project <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </button>
+                        <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full glass-panel text-gray-200 hover:text-white font-semibold text-base border border-white/10 hover:border-white/30 text-center transition-all duration-200">
+                            Explore Showcase
+                        </a>
+                    </div>
+
+                    <!-- Trust Metrics -->
+                    <div class="pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">120+</div>
+                            <div class="text-xs sm:text-sm text-gray-400">Projects Delivered</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">$4.2M+</div>
+                            <div class="text-xs sm:text-sm text-gray-400">Client Revenue Raised</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">99.8%</div>
+                            <div class="text-xs sm:text-sm text-gray-400">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Interactive Mockup -->
+                <div class="lg:col-span-5 relative animate-float">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Card Glow Backdrop -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-2xl blur opacity-30"></div>
+                        
+                        <!-- Main Preview Card -->
+                        <div class="relative glass-panel rounded-2xl p-6 border border-white/15 space-y-6">
+                            <!-- Browser Bar Header -->
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                </div>
+                                <div class="px-3 py-1 bg-white/5 rounded-md text-xs text-gray-400 font-mono">webcraft-demo-app.com</div>
+                                <i class="fa-solid fa-shield-halved text-emerald-400 text-xs"></i>
+                            </div>
+
+                            <!-- Live Demo Widget -->
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Live Performance Metric</div>
+                                        <div class="text-2xl font-bold text-white mt-1">+248% ROI Lift</div>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">Active Campaign</span>
+                                </div>
+
+                                <!-- Simulated Chart Graphic -->
+                                <div class="h-32 w-full flex items-end gap-2 pt-4 border-b border-white/10 pb-2">
+                                    <div class="w-1/6 bg-purple-900/40 rounded-t h-[35%] hover:bg-purple-600 transition-all"></div>
+                                    <div class="w-1/6 bg-purple-800/50 rounded-t h-[50%] hover:bg-purple-600 transition-all"></div>
+                                    <div class="w-1/6 bg-purple-700/60 rounded-t h-[40%] hover:bg-purple-600 transition-all"></div>
+                                    <div class="w-1/6 bg-indigo-600/70 rounded-t h-[70%] hover:bg-purple-600 transition-all"></div>
+                                    <div class="w-1/6 bg-cyan-500/80 rounded-t h-[85%] hover:bg-cyan-400 transition-all"></div>
+                                    <div class="w-1/6 bg-gradient-btn rounded-t h-[100%] hover:brightness-125 transition-all"></div>
+                                </div>
+
+                                <!-- Floating Badge Overlay -->
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                            <i class="fa-solid fa-[#10b981] fa-bolt"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs font-semibold text-white">PageSpeed Index</div>
+                                            <div class="text-[10px] text-gray-400">Optimized for Core Web Vitals</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm font-bold text-emerald-400">99 / 100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid Section -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs sm:text-sm font-bold text-brandCyan uppercase tracking-widest">Our Capabilities</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">End-to-End Solutions Designed to Scale</p>
+                <p class="text-gray-400 text-sm sm:text-base">We don't just write code. We build digital assets engineered for user conversion, global outreach, and premium business valuation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-panel glass-panel-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 text-brandPurple flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Custom Web Apps</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Scalable React, Next.js, and Tailwind web applications tailored for speed, SEO, and flawless responsiveness.</p>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Full Stack Architecture</li>
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Lightning Fast Speed</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel glass-panel-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-600/20 text-brandCyan flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Website Flipping & Exit</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Build, optimize, and monetize web assets ready for sale on Flippa, Empire Flippers, or Acquire.com.</p>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Monetization Setup</li>
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Valuation Optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-panel glass-panel-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-brandIndigo flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">UI/UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Dark-themed modern interfaces engineered with micro-interactions that captivate users and drive action.</p>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Figma Design Systems</li>
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Conversion Rate Optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-panel glass-panel-hover p-8 rounded-2xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Global Outreach</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Target premium US, UK & European clients with automated lead capture, Stripe/PayPal integration, and cold outreach setups.</p>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>International Payment Setup</li>
+                        <li><i class="fa-solid fa-check text-brandCyan mr-2"></i>Multilingual/Global SEO</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filterable Interactive Portfolio Showcase -->
+    <section id="portfolio" class="py-24 bg-darkCard/40 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs font-bold text-brandPurple uppercase tracking-widest mb-2">Our Portfolio</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Selected Works & Case Studies</p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0 glass-panel p-1.5 rounded-xl border border-white/10">
+                    <button onclick="filterPortfolio('all')" class="portfolio-tab text-xs font-medium px-4 py-2 rounded-lg transition-all bg-gradient-btn text-white" data-category="all">All Projects</button>
+                    <button onclick="filterPortfolio('saas')" class="portfolio-tab text-xs font-medium px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all" data-category="saas">SaaS Apps</button>
+                    <button onclick="filterPortfolio('ecommerce')" class="portfolio-tab text-xs font-medium px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all" data-category="ecommerce">E-Commerce</button>
+                    <button onclick="filterPortfolio('landing')" class="portfolio-tab text-xs font-medium px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all" data-category="landing">Landing Pages</button>
+                </div>
+            </div>
+
+            <!-- Portfolio Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                
+                <!-- Project 1 -->
+                <div class="portfolio-item glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-purple-500/40 transition-all duration-300" data-category="saas">
+                    <div class="relative overflow-hidden bg-gray-900 h-52 flex items-center justify-center p-6">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/60 to-indigo-900/40 group-hover:scale-105 transition-transform duration-500"></div>
+                        <i class="fa-solid fa-chart-pie text-6xl text-purple-400/50 group-hover:text-purple-300 transition-colors"></i>
+                        <span class="absolute top-4 right-4 px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs rounded-full border border-emerald-500/30 font-semibold">+185% MRR Lift</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-brandCyan uppercase">SaaS Platform</span>
+                            <span class="text-xs text-gray-400">US Client</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-brandPurple transition-colors">NovaAnalytics Dashboard</h3>
+                        <p class="text-sm text-gray-400">Modern real-time analytics portal built with Next.js & Stripe subscriptions.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                            <div class="flex gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] text-gray-300">React</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] text-gray-300">Tailwind</span>
+                            </div>
+                            <button onclick="openModal('project')" class="text-xs text-white hover:text-brandCyan font-semibold flex items-center gap-1">View Case Study <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-purple-500/40 transition-all duration-300" data-category="ecommerce">
+                    <div class="relative overflow-hidden bg-gray-900 h-52 flex items-center justify-center p-6">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-900/60 to-blue-900/40 group-hover:scale-105 transition-transform duration-500"></div>
+                        <i class="fa-solid fa-bag-shopping text-6xl text-cyan-400/50 group-hover:text-cyan-300 transition-colors"></i>
+                        <span class="absolute top-4 right-4 px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs rounded-full border border-emerald-500/30 font-semibold">$92k/mo Revenue</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-brandCyan uppercase">E-Commerce Store</span>
+                            <span class="text-xs text-gray-400">UK Brand</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-brandCyan transition-colors">LuxeAudio Headphone Store</h3>
+                        <p class="text-sm text-gray-400">Custom headless Shopify experience with 3D product preview model.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                            <div class="flex gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] text-gray-300">Shopify</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] text-gray-300">Three.js</span>
+                            </div>
+                            <button onclick="openModal('project')" class="text-xs text-white hover:text-brandCyan font-semibold flex items-center gap-1">View Case Study <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item glass-panel rounded-2xl overflow-hidden border border-white/10 group hover:border-purple-500/40 transition-all duration-300" data-category="landing">
+                    <div class="relative overflow-hidden bg-gray-900 h-52 flex items-center justify-center p-6">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900/60 to-purple-900/40 group-hover:scale-105 transition-transform duration-500"></div>
+                        <i class="fa-solid fa-rocket text-6xl text-indigo-400/50 group-hover:text-indigo-300 transition-colors"></i>
+                        <span class="absolute top-4 right-4 px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs rounded-full border border-emerald-500/30 font-semibold">14.2% Conv. Rate</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-brandCyan uppercase">Landing Page</span>
+                            <span class="text-xs text-gray-400">Australian Startup</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-brandIndigo transition-colors">FinTech AI App Landing</h3>
+                        <p class="text-sm text-gray-400">Ultra-fast mobile landing page driving waitlist signups for seed funding launch.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                            <div class="flex gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] text-gray-300">Framer</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 text-[11px] text-gray-300">HTML5/JS</span>
+                            </div>
+                            <button onclick="openModal('project')" class="text-xs text-white hover:text-brandCyan font-semibold flex items-center gap-1">View Case Study <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Website Valuation & Earnings Calculator -->
+    <section id="calculator" class="py-24 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-purple-500/20 glow-effect relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brandPurple/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="text-center max-w-2xl mx-auto space-y-3 mb-10">
+                    <span class="px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full text-xs font-semibold border border-purple-500/20">Interactive Estimator</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Website Valuation & Growth Calculator</h2>
+                    <p class="text-gray-400 text-sm">Calculate your site's potential resale value (Website Flipping) and estimated monthly earnings lift after redesigning with WebCraft Studio.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Controls -->
+                    <div class="lg:col-span-7 space-y-8">
+                        <!-- Traffic Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <label for="visitors-slider" class="text-gray-300">Monthly Visitors</label>
+                                <span id="visitors-val" class="text-brandCyan font-bold">25,000 / mo</span>
+                            </div>
+                            <input type="range" id="visitors-slider" min="1000" max="200000" step="1000" value="25000" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-purple-500">
+                        </div>
+
+                        <!-- Monthly Revenue Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <label for="revenue-slider" class="text-gray-300">Current Monthly Revenue ($)</label>
+                                <span id="revenue-val" class="text-brandPurple font-bold">$2,500 / mo</span>
+                            </div>
+                            <input type="range" id="revenue-slider" min="100" max="30000" step="100" value="2500" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                        </div>
+
+                        <!-- Industry Type -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-gray-300">Business Model / Industry</label>
+                            <select id="niche-select" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-brandPurple transition-colors">
+                                <option value="36" class="bg-darkBg text-white">SaaS / Subscription Software (36x Multiple)</option>
+                                <option value="30" class="bg-darkBg text-white">E-Commerce & Dropshipping (30x Multiple)</option>
+                                <option value="24" class="bg-darkBg text-white">Content / Affiliate / Ad Blog (24x Multiple)</option>
+                                <option value="40" class="bg-darkBg text-white">Digital Agency / High Ticket (40x Multiple)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Calculated Results Box -->
+                    <div class="lg:col-span-5 glass-panel p-6 sm:p-8 rounded-2xl border border-white/15 bg-darkCard/80 text-center space-y-6">
+                        <div>
+                            <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-1">Estimated Website Exit Value</div>
+                            <div id="valuation-result" class="text-4xl font-extrabold text-gradient">$90,000</div>
+                            <div class="text-[11px] text-gray-400 mt-1">Estimated listing price on Flippa / Acquire.com</div>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10">
+                            <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-1">Projected Post-Redesign Revenue</div>
+                            <div id="lift-result" class="text-2xl font-bold text-emerald-400">+$4,250 / mo</div>
+                            <div class="text-[11px] text-gray-400 mt-1">Based on average +70% CRO optimization</div>
+                        </div>
+
+                        <button onclick="openModal('audit')" class="w-full py-3.5 rounded-xl bg-gradient-btn text-white font-bold text-sm hover:opacity-90 transition-opacity">
+                            Get Custom Valuation Strategy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Grid -->
+    <section id="testimonials" class="py-24 bg-darkCard/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs font-bold text-brandCyan uppercase tracking-widest">Global Client Reviews</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Trusted by Founders Worldwide</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-panel p-8 rounded-2xl space-y-4 relative border border-white/10">
+                    <div class="flex text-amber-400 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">"WebCraft Studio overhauled our SaaS landing page. Within 30 days of launch, our visitor-to-paid trial conversions increased by 140%. Unbelievable work."</p>
+                    <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 font-bold">
+                            JD
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Jason Miller</div>
+                            <div class="text-xs text-gray-400">Founder, CloudSync (Austin, US)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-panel p-8 rounded-2xl space-y-4 relative border border-white/10">
+                    <div class="flex text-amber-400 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">"They helped me build and flip an affiliate website on Flippa for 4x higher valuation than I expected. Their UI polish makes all the difference."</p>
+                    <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">
+                            SL
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Sarah Lewis</div>
+                            <div class="text-xs text-gray-400">Digital Entrepreneur (London, UK)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-panel p-8 rounded-2xl space-y-4 relative border border-white/10">
+                    <div class="flex text-amber-400 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">"Fast communication, expert modern design, and seamlessly integrated Stripe checkout. Best web agency experience I've had as a startup founder."</p>
+                    <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 font-bold">
+                            MK
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Michael K.</div>
+                            <div class="text-xs text-gray-400">CEO, Apex Commerce (Sydney, AU)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section id="pricing" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <h2 class="text-xs font-bold text-brandPurple uppercase tracking-widest">Transparent Pricing</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Investment Packages Built for Growth</p>
+
+                <!-- Billing Toggle -->
+                <div class="flex items-center justify-center gap-4 pt-4">
+                    <span class="text-sm font-medium text-gray-300">One-Time Project</span>
+                    <button id="billing-toggle" onclick="toggleBilling()" class="w-14 h-8 rounded-full bg-white/10 p-1 transition-colors relative">
+                        <div id="toggle-circle" class="w-6 h-6 rounded-full bg-brandPurple transition-transform transform translate-x-0"></div>
+                    </button>
+                    <span class="text-sm font-medium text-gray-300 flex items-center gap-1.5">
+                        Monthly Retainer <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold border border-purple-500/30">Save 20%</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- Plan 1: Starter -->
+                <div class="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col justify-between space-y-8">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Starter Landing</h3>
+                            <p class="text-xs text-gray-400 mt-1">Perfect for new launches & validation</p>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-4xl font-black text-white plan-price" data-onetime="$799" data-monthly="$299">$799</span>
+                            <span class="text-gray-400 text-xs ml-2 plan-period">/ project</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> 1 High-Converting Landing Page</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> 100% Mobile & Speed Optimized</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Lead Capture & Email Setup</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Standard 5-day delivery</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('project')" class="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition-all">Select Starter</button>
+                </div>
+
+                <!-- Plan 2: Pro (Featured) -->
+                <div class="glass-panel p-8 rounded-3xl border-2 border-brandPurple relative glow-effect flex flex-col justify-between space-y-8 bg-darkCard/90">
+                    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-btn text-white text-xs font-extrabold uppercase tracking-wider">Most Popular</span>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Pro Growth App</h3>
+                            <p class="text-xs text-gray-400 mt-1">For scaling businesses & SaaS products</p>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-4xl font-black text-gradient plan-price" data-onetime="$1,999" data-monthly="$799">$1,999</span>
+                            <span class="text-gray-400 text-xs ml-2 plan-period">/ project</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Up to 6 Custom Pages / App</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Stripe/PayPal Payment Integration</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Custom Interactive Components</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Website Valuation & SEO Audit</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Priority Support & Revisions</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('project')" class="w-full py-3.5 rounded-xl bg-gradient-btn text-white font-bold text-sm hover:shadow-lg hover:shadow-purple-500/30 transition-all">Start Pro Project</button>
+                </div>
+
+                <!-- Plan 3: Enterprise -->
+                <div class="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col justify-between space-y-8">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Flip & Scale Empire</h3>
+                            <p class="text-xs text-gray-400 mt-1">For investors & digital portfolio flipping</p>
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="text-4xl font-black text-white plan-price" data-onetime="$3,499" data-monthly="$1,499">$3,499</span>
+                            <span class="text-gray-400 text-xs ml-2 plan-period">/ project</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Complete Custom Web Asset Build</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Flippa/Acquire Listing Preparation</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Global Outreach & Client Funnel</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brandCyan text-xs"></i> Dedicated Account Lead & 24/7 Support</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('project')" class="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition-all">Contact Sales</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Footer Banner -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-10 sm:p-16 border border-white/15 bg-gradient-to-r from-purple-900/40 via-darkCard to-cyan-900/40 text-center space-y-6 relative overflow-hidden">
+                <h2 class="text-3xl sm:text-5xl font-black text-white">Ready to Build Something Extraordinary?</h2>
+                <p class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base">Let's discuss your web project, custom design, or Flippa asset build today. Get a free proposal in 24 hours.</p>
+                <div class="pt-4">
+                    <button onclick="openModal('project')" class="px-8 py-4 rounded-full bg-gradient-btn text-white font-bold text-base shadow-xl hover:scale-105 transition-transform">
+                        Claim Your Free Proposal <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 pt-16 pb-12 bg-darkBg text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <span class="text-2xl font-extrabold text-white tracking-tight">WebCraft<span class="text-gradient">.Studio</span></span>
+                    <p class="text-xs text-gray-400 leading-relaxed">Designing and building high-converting websites, SaaS portals, and flip-ready web assets for global founders.</p>
+                    <div class="flex space-x-4 text-gray-400">
+                        <a href="#" class="hover:text-brandPurple transition-colors"><i class="fa-brands fa-twitter text-lg"></i></a>
+                        <a href="#" class="hover:text-brandPurple transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+                        <a href="#" class="hover:text-brandPurple transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                        <a href="#" class="hover:text-brandPurple transition-colors"><i class="fa-brands fa-discord text-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-semibold text-xs uppercase tracking-wider">Navigation</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-white transition-colors">Showcase</a></li>
+                        <li><a href="#calculator" class="hover:text-white transition-colors">Valuation Tool</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing Plans</a></li>
+                    </ul>
+                </div>
+
+                <!-- Platforms -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-semibold text-xs uppercase tracking-wider">Flipping & Platforms</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-white transition-colors">Flippa Ready Sites</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Acquire.com Micro SaaS</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Shopify Stores</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Stripe Integration</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-semibold text-xs uppercase tracking-wider">Stay Updated</h4>
+                    <p class="text-xs text-gray-400">Subscribe for weekly website flipping tips & UX insights.</p>
+                    <form onsubmit="event.preventDefault(); alert('Subscribed successfully!');" class="flex">
+                        <input type="email" placeholder="Enter email" required class="px-3 py-2 rounded-l-lg bg-white/5 border border-white/10 text-xs text-white focus:outline-none w-full">
+                        <button type="submit" class="px-4 py-2 bg-gradient-btn text-white text-xs font-semibold rounded-r-lg hover:opacity-90">Join</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs gap-4">
+                <div>&copy; 2026 WebCraft Studio. All rights reserved.</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                    <a href="#" class="hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 border border-white/15 relative space-y-6 bg-darkCard animate-float">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div>
+                <h3 id="modal-title" class="text-2xl font-bold text-white">Start Your Project</h3>
+                <p id="modal-subtitle" class="text-xs text-gray-400 mt-1">Fill in the details below and we will get back to you within 12 hours.</p>
+            </div>
+
+            <form id="modal-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Your Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-brandPurple">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Email Address</label>
+                    <input type="email" required placeholder="john@example.com" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-brandPurple">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Project Type</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-brandPurple">
+                        <option class="bg-darkBg" value="landing">Custom Landing Page</option>
+                        <option class="bg-darkBg" value="saas">SaaS Application</option>
+                        <option class="bg-darkBg" value="flippa">Flippa / Asset Flipping Site</option>
+                        <option class="bg-darkBg" value="ecommerce">E-Commerce Store</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Project Details / Message</label>
+                    <textarea rows="3" required placeholder="Tell us about your goals, timeline, or requirements..." class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-brandPurple"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-btn text-white font-bold text-sm shadow-lg hover:shadow-purple-500/25 transition-all">
+                    Submit Request <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Portfolio Filtering
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const tabs = document.querySelectorAll('.portfolio-tab');
+
+            tabs.forEach(tab => {
+                if (tab.getAttribute('data-category') === category) {
+                    tab.classList.add('bg-gradient-btn', 'text-white');
+                    tab.classList.remove('text-gray-400');
+                } else {
+                    tab.classList.remove('bg-gradient-btn', 'text-white');
+                    tab.classList.add('text-gray-400');
+                }
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Calculator Interactive Logic
+        const visitorsSlider = document.getElementById('visitors-slider');
+        const revenueSlider = document.getElementById('revenue-slider');
+        const nicheSelect = document.getElementById('niche-select');
+        const visitorsVal = document.getElementById('visitors-val');
+        const revenueVal = document.getElementById('revenue-val');
+        const valuationResult = document.getElementById('valuation-result');
+        const liftResult = document.getElementById('lift-result');
+
+        function updateCalculator() {
+            const visitors = parseInt(visitorsSlider.value);
+            const revenue = parseInt(revenueSlider.value);
+            const multiple = parseInt(nicheSelect.value);
+
+            visitorsVal.innerText = visitors.toLocaleString() + ' / mo';
+            revenueVal.innerText = '$' + revenue.toLocaleString() + ' / mo';
+
+            // Calculate Valuation (Monthly Rev * Multiple)
+            const valuation = revenue * multiple;
+            valuationResult.innerText = '$' + valuation.toLocaleString();
+
+            // Calculate CRO Revenue Lift (~70% lift)
+            const lift = Math.round(revenue * 0.7);
+            liftResult.innerText = '+$' + lift.toLocaleString() + ' / mo';
+        }
+
+        visitorsSlider.addEventListener('input', updateCalculator);
+        revenueSlider.addEventListener('input', updateCalculator);
+        nicheSelect.addEventListener('change', updateCalculator);
+
+        // Pricing Toggle Logic
+        let isMonthly = false;
+        function toggleBilling() {
+            isMonthly = !isMonthly;
+            const circle = document.getElementById('toggle-circle');
+            const prices = document.querySelectorAll('.plan-price');
+            const periods = document.querySelectorAll('.plan-period');
+
+            if (isMonthly) {
+                circle.classList.add('translate-x-6');
+                prices.forEach(price => price.innerText = price.getAttribute('data-monthly'));
+                periods.forEach(period => period.innerText = '/ month');
+            } else {
+                circle.classList.remove('translate-x-6');
+                prices.forEach(price => price.innerText = price.getAttribute('data-onetime'));
+                periods.forEach(period => period.innerText = '/ project');
+            }
+        }
+
+        // Modal Functionality
+        const modal = document.getElementById('contact-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+
+        function openModal(type) {
+            if (type === 'audit') {
+                modalTitle.innerText = "Request Free Website Audit";
+                modalSubtitle.innerText = "Send us your site link and we'll send a full SEO & CRO audit report.";
+            } else {
+                modalTitle.innerText = "Start Your Project";
+                modalSubtitle.innerText = "Tell us about your project vision and budget requirements.";
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert("Thank you! Your request has been received. Our team will contact you shortly.");
+            closeModal();
+        }
+
+        // Initialize Calculator default
+        updateCalculator();
+    </script>
+</body>
